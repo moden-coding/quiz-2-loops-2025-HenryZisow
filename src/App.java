@@ -57,35 +57,57 @@ import java.util.*;
  */
 
 //SAMPLE USAGE: A+
-/** The magic number is 2. Shh! Don't tell anyone
- *  Enter a guess:
- *  10
- *  Way off!
- *  Enter a guess:
- *  3
- *  Very close!
- *  Enter a guess:
- *  2
- *  It took you 3 guesses.
+/**
+ * The magic number is 2. Shh! Don't tell anyone
+ * Enter a guess:
+ * 10
+ * Way off!
+ * Enter a guess:
+ * 3
+ * Very close!
+ * Enter a guess:
+ * 2
+ * It took you 3 guesses.
  */
-
-
 
 public class App {
     public static void main(String[] args) throws Exception {
-        //DO NOT TOUCH THE THREE LINES BELOW
+        // DO NOT TOUCH THE THREE LINES BELOW
         int magicNumber = getMeARandomNumber();
-        System.out.println("The magic number is "+ magicNumber + ". Shh! Don't tell anyone");
-        Scanner reader = new Scanner(System.in);
+        System.out.println("The magic number is " + magicNumber + ". Shh! Don't tell anyone");
+        Scanner scanner = new Scanner(System.in);
+        int guesses = 0;
 
-        //WRITE YOUR CODE IN THE SPACE BELOW
+        while (true) {
+            System.out.println("Enter a guess:");
+            int guess = Integer.valueOf(scanner.nextLine());
+            if (guess < 1 || guess > 10) {
+                System.out.println("Enter a number between 0 and 10!");
+            } else {
+                if (guess == magicNumber) {
+                    guesses++;
+                    break;
+                } else {
+                    if (magicNumber - guess <= 2 && magicNumber - guess >= -2) {
+                        System.out.println("Very close!");
+                        guesses++;
+                } else {
+                    if (magicNumber - guess > 5 || magicNumber - guess < -5) {
+                        System.out.println("Way off!");
+                        guesses++;
+                        continue;
+                        }
+                    }
+                }
+            }
 
-        
+        }
+        System.out.println("It took you " + guesses + " guesses.");
+
     }
 
-
-    //Do not modify!!!
-    public static int getMeARandomNumber(){
+    // Do not modify!!!
+    public static int getMeARandomNumber() {
         Random random = new Random();
         return random.nextInt(10) + 1;
     }
